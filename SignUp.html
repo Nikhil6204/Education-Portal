@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | EduElevate</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/style1.css">
+</head>
+
+<body>
+    <header class="header">
+        <a href="home.html" class="logo"> <i class="fas fa-graduation-cap"></i> EduElevate </a>
+    </header>
+
+    <div class="container">
+        <div class="login-bg-1"></div>
+        <div class="login-bg-2"></div>
+        <div class="login-container">
+            <div class="icon-wrapper">
+                <i class="ri-user-add-fill icon-big"></i>
+            </div>
+            <h2 class="sign-in">Create Account</h2>
+
+            <form id="signupForm">
+                <div class="input-holder">
+                    <div class="input-icon-wrapper-bg">
+                        <div class="input-icon-wrapper">
+                            <i class="ri-user-fill input-icon"></i>
+                        </div>
+                    </div>
+                    <input type="text" id="username" placeholder="Username">
+                </div>
+
+                <div class="input-holder">
+                    <div class="input-icon-wrapper-bg">
+                        <div class="input-icon-wrapper">
+                            <i class="ri-mail-fill input-icon"></i>
+                        </div>
+                    </div>
+                    <input type="email" id="email" placeholder="Email">
+                </div>
+
+                <div class="input-holder">
+                    <div class="input-icon-wrapper-bg">
+                        <div class="input-icon-wrapper">
+                            <i class="ri-lock-fill input-icon"></i>
+                        </div>
+                    </div>
+                    <input type="password" id="password" placeholder="Password">
+                </div>
+
+                <div class="input-holder">
+                    <div class="input-icon-wrapper-bg">
+                        <div class="input-icon-wrapper">
+                            <i class="ri-lock-fill input-icon"></i>
+                        </div>
+                    </div>
+                    <input type="password" id="confirmPassword" placeholder="Confirm Password">
+                </div>
+
+                <div class="login-wrapper">
+                    <button type="submit" class="login" id="signupBtn" disabled>SIGN UP</button>
+                    <div class="no-account">
+                        <span class="forgot">Already have an account?</span>
+                        <a href="LoginPage.html" class="sign-up">Log In</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="shadow"></div>
+    </div>
+
+    <script>
+        const username = document.getElementById("username");
+        const email = document.getElementById("email");
+        const password = document.getElementById("password");
+        const confirmPassword = document.getElementById("confirmPassword");
+        const signupBtn = document.getElementById("signupBtn");
+        const signupForm = document.getElementById("signupForm");
+
+        function validateInputs() {
+            if (username.value.trim() && email.value.trim() && password.value.trim() && confirmPassword.value.trim()) {
+                signupBtn.disabled = false;
+            } else {
+                signupBtn.disabled = true;
+            }
+        }
+
+        function isValidEmail(email) {
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailPattern.test(email);
+        }
+
+        username.addEventListener("input", validateInputs);
+        email.addEventListener("input", validateInputs);
+        password.addEventListener("input", validateInputs);
+        confirmPassword.addEventListener("input", validateInputs);
+
+        signupForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            if (!username.value.trim()) {
+                alert("Please enter a username.");
+                username.focus();
+                return;
+            }
+
+            if (!isValidEmail(email.value.trim())) {
+                alert("Please enter a valid email address.");
+                email.focus();
+                return;
+            }
+
+            if (!password.value.trim()) {
+                alert("Please enter a password.");
+                password.focus();
+                return;
+            }
+
+            if (password.value !== confirmPassword.value) {
+                alert("Passwords do not match.");
+                confirmPassword.focus();
+                return;
+            }
+
+            alert("Sign-up successful! Redirecting to home page...");
+            window.location.href = "home.html";
+        });
+    </script>
+</body>
+
+</html>
